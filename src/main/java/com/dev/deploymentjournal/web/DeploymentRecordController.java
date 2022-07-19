@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/deployment-record")
+@CrossOrigin
 public class DeploymentRecordController {
 
     @Autowired
@@ -40,6 +41,14 @@ public class DeploymentRecordController {
     public ResponseEntity<?> getDeploymentRecordsByProject(@PathVariable String projectName) {
 
         List<DeploymentRecord> records = deploymentRecordService.findAllByProject(projectName);
+
+        return new ResponseEntity<>(records, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getDeploymentRecordsAll() {
+
+        List<DeploymentRecord> records = deploymentRecordService.findAll();
 
         return new ResponseEntity<>(records, HttpStatus.OK);
     }

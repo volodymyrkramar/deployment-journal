@@ -17,6 +17,13 @@ public class DeploymentRecord {
     @NotBlank(message = "Please provide a project")
     private String project;
 
+    @NotBlank(message = "Please provide an environment")
+    private String environment;
+
+    @NotNull(message = "Please provide a deployment date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date deploymentDate;
+
     private String coreBranch;
 
     private String coreCommit;
@@ -24,10 +31,6 @@ public class DeploymentRecord {
     private String ilBranch;
 
     private String ilCommit;
-
-    @NotNull(message = "Please provide a deployment date")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date deploymentDate;
 
     private String notes;
 
@@ -157,5 +160,13 @@ public class DeploymentRecord {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(String environment) {
+        this.environment = environment;
     }
 }

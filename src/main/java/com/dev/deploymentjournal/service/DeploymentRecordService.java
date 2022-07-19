@@ -24,6 +24,10 @@ public class DeploymentRecordService {
         return deploymentRecordRepository.findAllByProject(project);
     }
 
+    public List<DeploymentRecord> findAll() {
+        return (List<DeploymentRecord>) deploymentRecordRepository.findAll();
+    }
+
     public void updateDeletedFlag(Long id) {
         DeploymentRecord toUpdate = deploymentRecordRepository.findById(id).orElse(null);
         if (toUpdate != null) {
