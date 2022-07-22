@@ -34,8 +34,10 @@ public class DeploymentRecord {
 
     private String notes;
 
+    @Column(updatable = false)
     private String createdBy;
 
+    @Column(updatable = false)
     private Date createdDate;
 
     private String updatedBy;

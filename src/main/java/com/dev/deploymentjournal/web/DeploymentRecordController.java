@@ -37,20 +37,20 @@ public class DeploymentRecordController {
         return new ResponseEntity<>(deploymentRecord, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{projectName}")
-    public ResponseEntity<?> getDeploymentRecordsByProject(@PathVariable String projectName) {
-
-        List<DeploymentRecord> records = deploymentRecordService.findAllByProject(projectName);
-
-        return new ResponseEntity<>(records, HttpStatus.OK);
-    }
-
     @GetMapping("/all")
     public ResponseEntity<?> getDeploymentRecordsAll() {
 
         List<DeploymentRecord> records = deploymentRecordService.findAll();
 
         return new ResponseEntity<>(records, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getDeploymentRecordById(@PathVariable Long id) {
+
+        DeploymentRecord record = deploymentRecordService.findById(id);
+
+        return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

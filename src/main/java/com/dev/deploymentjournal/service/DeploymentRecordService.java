@@ -5,7 +5,9 @@ import com.dev.deploymentjournal.repo.DeploymentRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DeploymentRecordService {
@@ -20,12 +22,8 @@ public class DeploymentRecordService {
         return deploymentRecordRepository.save(deploymentRecord);
     }
 
-    public List<DeploymentRecord> findAllByProject(String project) {
-        return deploymentRecordRepository.findAllByProject(project);
-    }
-
     public List<DeploymentRecord> findAll() {
-        return (List<DeploymentRecord>) deploymentRecordRepository.findAll();
+        return ((List<DeploymentRecord>) deploymentRecordRepository.findAll()).stream().sorted(Comparator.comparing(DeploymentRecord :: getDeploymentDate)).collect(Collectors.toList());
     }
 
     public void updateDeletedFlag(Long id) {
@@ -35,4 +33,10 @@ public class DeploymentRecordService {
             deploymentRecordRepository.save(toUpdate);
         }
     }
+
+    public DeploymentRecord findById(Long id) {
+        return deploymentRecordRepository.findById(id).orElse(null);
+    }
+
+
 }
